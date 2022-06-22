@@ -32,6 +32,6 @@ Note: The Java file will not compile, its purpose is only for review / comprehen
     1. suspicious practices
     1. readability
 1. Any other observations or suggestions?
-     1. java 6/7/8/11 improvements
+     1. java 6/7/8/11/17 improvements
      1. sample of improved code
      1. any other observation
