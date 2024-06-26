@@ -6,12 +6,18 @@
 	<parent>
 		<artifactId>parent-bom</artifactId>
 		<groupId>com.halcom</groupId>
-		<version>2.22.0</version>
+		<!-- Uporaba propertija revision (parent pom) je problematična.. ko maven namesti naše artefakte, se datoteke pom.xml kopirajo brez sprememb (lastnosti niso zamenjane z njihovo vrednostjo) -->
+		<!-- Predlagana rešitev: Uporaba plugina Maven Resources ali Maven Enforcer, da zagotovimo pravilno zamenjavo ${revision} s končno vrednostjo pri namestitvi -->
+		<!-- Link do članka: https://jeanchristophegay.com/en/posts/maven-unique-version-multi-modules-build/ -->
+		<version>${revision}</version>
 	</parent>
 	<artifactId>module</artifactId>
 	<name>NG engine framework</name>
 	<properties>
-		<revision>2.22.0-SNAPSHOT</revision>
+		<!-- Revision tag ni potreben, ker je že deklariran v root pom.xml
+		<revision>2.22.0-SNAPSHOT</revision> -->
+		<utils.version>0.0.475</utils.version>
+		<junitparams.version>1.0.4</junitparams.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -21,7 +27,8 @@
 		<dependency>
 			<groupId>com.halcom</groupId>
 			<artifactId>accounts-common</artifactId>
-			<version>2.22.0-SNAPSHOT</version>
+			<!-- Odstranjen version tag, da podeduje iz root pom.xml
+			<version>2.22.0-SNAPSHOT</version> -->
 			<exclusions>
 				<exclusion>
 					<groupId>javax.xml.bind</groupId>
@@ -36,20 +43,21 @@
 		<dependency>
 			<groupId>4u.even.beterest</groupId>
 			<artifactId>Utils</artifactId>
-			<version>0.0.475</version>
+			<version>${utils.version}</version> <!-- Uporabimo property za verzijo -->
 		</dependency>
 		<dependency>
 			<groupId>tv.bestest</groupId>
 			<artifactId>JUnitParams</artifactId>
-			<version>1.0.4</version>
+			<version>${junitparams.version}</version> <!-- Uporabimo property za verzijo -->
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<!-- Dependency management mora biti centraliziran v root pom.xml, da se izogne redundantnosti in morebitnim konfliktom
 	<dependencyManagement>
 		<dependency>
 			<groupId>com.halcom</groupId>
 			<artifactId>accounts-common</artifactId>
 			<version>1.2.3</version>
 		</dependency>
-	</dependencyManagement>
+	</dependencyManagement> -->
 </project>

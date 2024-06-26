@@ -3,25 +3,32 @@
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.halcom</groupId> <!-- Dodan groupId za jasnost in pravilno identifikacijo artefakta -->
 	<artifactId>parent-bom</artifactId>
 	<name>parent bom</name>
-	<version>2.22.0-SNAPSHOT</version>
+	<!-- Uporabljamo property za verzijo -->
+	<version>${revision}</version>
 	<properties>
 		<revision>2.22.0-SNAPSHOT</revision>
+		<!-- Ni napačno hardkodirati v dependencyManagement je pa dobra praksa, da uporabljamo properties za številke različic -->
+		<engine-common.version>3.4.5</engine-common.version>
+		<accounts-common.version>1.2.3</accounts-common.version>
 	</properties>
 	<modules>
 		<module>module</module>
 	</modules>
 	<dependencyManagement>
-		<dependency>
-			<groupId>si.halcom</groupId>
-			<artifactId>engine-common</artifactId>
-			<version>3.4.5</version>
-		</dependency>
-		<dependency>
-			<groupId>com.halcom</groupId>
-			<artifactId>accounts-common</artifactId>
-			<version>1.2.3</version>
-		</dependency>
+		<dependencies> <!-- Dodan manjkajoč dependencies tag -->
+			<dependency>
+				<groupId>si.halcom</groupId>
+				<artifactId>engine-common</artifactId>
+				<version>${engine-common.version}</version> <!-- Uporabljamo property za verzijo -->
+			</dependency>
+			<dependency>
+				<groupId>com.halcom</groupId>
+				<artifactId>accounts-common</artifactId>
+				<version>${accounts-common.version}</version> <!-- Uporabljamo property za verzijo -->
+			</dependency>
+		</dependencies>
 	</dependencyManagement>
 </project>
